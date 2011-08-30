@@ -1,0 +1,110 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Boosters}}
+\title{Don't be afraid of kvm and libvirt}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\sectionpage{kvm}
+
+\begin{frame}[t]
+\frametitle{kvm}
+\begin{itemize}
+   \item special version of QEMU
+   \item full virtualization
+   \item special virtio drivers for network/disk (in kernel)
+   \item uses HW support (Intel VT or AMD-V)
+   \begin{itemize}
+   	\item requires kernel module to do so
+   	\item support is in kernel since 2.6.20
+   \end{itemize}
+\end{itemize}
+
+\vspace{.2cm}
+\begin{center}
+\texttt{egrep '$^\wedge$flags.*(vmx|svm)' /proc/cpuinfo}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{QEMU (1/2)}
+\begin{itemize}
+   \item several sound card/network card/graphics card emulations
+   \item support for accessing usb device on host directly
+   \item can emulate serial/parallel port
+   \item can emulate up to 255 CPU (you don't have to have them)
+   \item can emulate many different architectures
+   \item can emulate mtd, sdcard, paralel flash, \dots
+   \item snaphot mode (nothing is written to the image)
+   \begin{itemize}
+   	\item until you say so
+   \end{itemize}
+   \item qcow2 image format (compression, snapshots, \dots)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{QEMU (2/2)}
+\begin{itemize}
+   \item serial/curses/sdl/vnc graphics output
+   \item can emulate many network cards with many different settings
+   \item can create complicated networks (many vlans) of virtual machines
+   \item can emulate samba server over the directory
+   \item have monitor console (can be redirected anywhere)
+   \item can save and load virtual machine state
+   \item support for offline and online migration
+   \item support for ballooning (host "takes" away memory from guest)
+   \item KSM
+\end{itemize}
+\end{frame}
+
+
+\sectionpage{libvirt}
+
+\begin{frame}[t]
+\frametitle{libvirt}
+\begin{itemize}
+   \item abstraction for virtual machines
+   \item same interface for different hypervisors
+   \begin{itemize}
+   	\item QEMU/KVM, Xen, VirtualBox, OpenVZ, VMware ESX, \dots
+   \end{itemize}
+   \item many bindings
+   \begin{itemize}
+   	\item Ruby, Python, Perl, C\#, PHP, Java, \dots
+   \end{itemize}
+   \item accessible over the network
+   \item commandline interface - \texttt{virsh}
+   \item graphical interface - \texttt{virt-manager}
+   \item accessible over the network
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{libvirt}
+\begin{itemize}
+   \item configuration in XML
+   \item \texttt{virsh create machine.xml}
+   \item \texttt{virsh start machine}
+   \item \texttt{virsh list}
+   \item \texttt{virsh edit machine}
+   \item \texttt{virsh destroy machine}
+\end{itemize}
+\end{frame}
+
+
+\end{document}
+
