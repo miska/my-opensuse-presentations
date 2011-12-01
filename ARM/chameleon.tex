@@ -1,0 +1,156 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Boosters}}
+\title{openSUSE \& ARM}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\sectionpage{ARM}
+
+\begin{frame}[t]
+\frametitle{ARM}
+\begin{itemize}
+   \item 32-bit embedded RISC microprocessors architecture
+   \item widely used in embedded devices
+   \begin{itemize}
+   	\item cell phones
+	\item tablets
+	\item recently netbooks
+	\item cheap desktops for geeks
+   \end{itemize}
+   \item power efficient
+   \item used to be less powerful then x86
+   \item gaining performance while keeping power efficiency
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{ARM examples: Google Nexus S}
+\begin{center}
+\includegraphics[height=6cm]{Nexuss.jpg}
+
+{\scriptsize Photo by Samsung USA}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{ARM examples: ASUS Transformer}
+\begin{center}
+\includegraphics[height=6cm]{Transformer.jpg}
+
+{\scriptsize Photo by www.blogeee.net}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{ARM examples: iPad}
+\begin{center}
+\includegraphics[height=6cm]{iPad.jpg}
+
+{\scriptsize Photo by John Karakatsanis}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{ARM examples: Beagle Board}
+\begin{center}
+\includegraphics[height=6cm]{Beagle.jpg}
+
+{\scriptsize Photo by me}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{ARM examples: Panda Board build server}
+\begin{center}
+\includegraphics[height=6cm]{server.jpg}
+
+{\scriptsize Photo by steevithak}
+\end{center}
+\end{frame}
+
+\sectionpage{openSUSE @ ARM}
+
+\begin{frame}[t]
+\frametitle{History}
+\begin{itemize}
+   \item started as GSoC in 2009
+   \item died later because of lack of people
+   \item popped up again this year on openSUSE Conference
+   \begin{itemize}
+   	\item several people wanted to have openSUSE on their gadgets
+	\item looked like enough people to start again
+	\item mailing list revived
+   \end{itemize}
+   \item several people spend last hackweek reviving it
+   \item busy since then, doing big progress
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{How it works}
+\begin{itemize}
+   \item main focus \textit{armv7l} @ \textit{openSUSE:Factory}
+   \begin{itemize}
+   	\item hardfp ;-)
+   \end{itemize}
+   \item uses Open Build Service
+   \item shadows openSUSE:Factory
+   \item fixes goes directly (via devel projects) to the Factory
+   \item building on x86(\_64) using qemu and \textit{binfmt}
+   \item[\(\Rightarrow\)] similar to native build just slower ;-)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{What we have}
+\begin{itemize}
+   \item still work in progress
+   \item native build hosts
+   \item vivid community
+   \item 3000/4000 packages of factory are building
+   \item kernels for for several devices
+   \item hopes up for ARM support ready for 12.2 ;-)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{What is missing}
+\begin{itemize}
+   \item publishing
+   \begin{itemize}
+   	\item too vivid
+   \end{itemize}
+   \item wider testing
+   \item java
+   \item prepared rootfs/installation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Special thanks}
+\begin{itemize}
+   \item Several EfikaMX devices donated by genesi!
+   \begin{center}
+   \includegraphics[height=2cm]{genesi.jpg}
+   \end{center}
+   \item Several PandaBoards devices donated by TI and PandaBoard community!
+   \begin{center}
+   \includegraphics[height=2cm]{ti.jpg}
+   \end{center}
+\end{itemize}
+\end{frame}
+
+\end{document}
