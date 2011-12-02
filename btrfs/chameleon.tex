@@ -69,7 +69,52 @@
       \item can create snapshots
       \item can delete snapshots
       \item can show difference between snapshots
-      \item can be used to automate some actions
+      \item can mount snapshots
+      \item can list snapshots including type and description
+      \item comes with zypper an YaST integration
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Types of snapshot}
+\begin{itemize}
+   \item \textbf{single}
+   \begin{itemize}
+      \item simple snapshots with no realation to the others
+   \end{itemize}
+   \item \textbf{timeline}
+   \begin{itemize}
+      \item created automatically by cron
+   \end{itemize}
+   \item \textbf{pre/post}
+   \begin{itemize}
+      \item created automatically by YaST or zypper
+      \item pre snapshot is created before action
+      \item post snapshot is created after action
+      \item post snapshots knows, who's it's pre snapshot
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Types of clean ups}
+\begin{itemize}
+   \item \textbf{number}
+   \begin{itemize}
+      \item keeps only \textit{number} of newest snapshots
+      \item option \texttt{NUMBER\_CLEANUP} in sysconfig file
+   \end{itemize}
+   \item \textbf{timeline}
+   \begin{itemize}
+      \item almost same as previous
+      \item keeps also \textit{number} of every type of timeline snapshot
+      \item option \texttt{TIMELINE\_CLEANUP} in sysconfig file
+   \end{itemize}
+   \item \textbf{empty-pre-post}
+   \begin{itemize}
+      \item deletes pre/post pairs when there is no change
+      \item option \texttt{EMPTY\_PRE\_POST\_CLEANUP} in sysconfig file
    \end{itemize}
 \end{itemize}
 \end{frame}
