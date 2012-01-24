@@ -33,6 +33,7 @@
    \item power efficient
    \item used to be less powerful then x86
    \item gaining performance while keeping power efficiency
+   \item X86 is gaining power efficiency while keeping some of the performance
 \end{itemize}
 \end{frame}
 
@@ -51,15 +52,6 @@
 \includegraphics[height=6cm]{Transformer.jpg}
 
 {\scriptsize Photo by www.blogeee.net}
-\end{center}
-\end{frame}
-
-\begin{frame}[t]
-\frametitle{ARM examples: iPad}
-\begin{center}
-\includegraphics[height=6cm]{iPad.jpg}
-
-{\scriptsize Photo by John Karakatsanis}
 \end{center}
 \end{frame}
 
@@ -84,7 +76,7 @@
 \sectionpage{openSUSE @ ARM}
 
 \begin{frame}[t]
-\frametitle{History}
+\frametitle{Little bit of history}
 \begin{itemize}
    \item started as GSoC in 2009
    \item died later because of lack of people
@@ -100,18 +92,77 @@
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{How it works}
+\frametitle{Workflow}
 \begin{itemize}
-   \item main focus \textit{armv7l} @ \textit{openSUSE:Factory}
+   \item we use Open Build Service
    \begin{itemize}
-   	\item hardfp ;-)
+   	\item actually two instances
    \end{itemize}
-   \item uses Open Build Service
    \item shadows openSUSE:Factory
    \item fixes goes directly (via devel projects) to the Factory
-   \item building on x86(\_64) using qemu and \textit{binfmt}
-   \item[\(\Rightarrow\)] similar to native build just slower ;-)
+   \begin{itemize}
+   	\item no separate ARM sources
+	\item no special treatment for ARM
+   	\item anybody can check what is wrong and fix it
+	\item always latest and greatest
+   \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Supported architectures}
+armv7l
+\begin{itemize}
+\item \texttt{armv7-a} tuned for \texttt{cortex-a9}
+\item main focus
+\item kernels so far for \texttt{omap2+}, \texttt{tegra2} and \texttt{imx51}
+\item hard float \texttt{-neon +thumb +vfpv3-d16}
+\end{itemize}
+armv5el
+\begin{itemize}
+\item \texttt{armv5te}
+\item meant for maximum compatibility
+\item softfp \textit{-all} \texttt{-thumb}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Building}
+Crosscompilation
+\begin{itemize}
+\item used just to bootstrap distribution
+\end{itemize}
+Qemu
+\begin{itemize}
+\item building ARM port on our x86\_64 build farm
+\item user mode emulation + binfmt
+\item publicly accessible - \texttt{http://build.opensuse.org}
+\end{itemize}
+Native build
+\begin{itemize}
+\item rebuilds everything natively on our ARM build farm
+\item hidden behind the walls
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Troubles}
+GPU drivers
+\begin{itemize}
+\item closed source
+\item binary blobs for softfp only
+\end{itemize}
+Qemu
+\begin{itemize}
+\item sometimes not good enough emulation
+\item creating new process takes time
+\end{itemize}
+Native build - small RAM
+\begin{itemize}
+\item some packages runs out of memory during native build
+\item swap helps
+\end{itemize}
+Missing configuration for ARM
 \end{frame}
 
 \begin{frame}[t]
@@ -120,22 +171,9 @@
    \item still work in progress
    \item native build hosts
    \item vivid community
-   \item 3000/4000 packages of factory are building
-   \item kernels for for several devices
+   \item more then 4000 packages
+   \item about 500 to go in Factory
    \item hopes up for ARM support ready for 12.2 ;-)
-\end{itemize}
-\end{frame}
-
-\begin{frame}[t]
-\frametitle{What is missing}
-\begin{itemize}
-   \item publishing
-   \begin{itemize}
-   	\item too vivid
-   \end{itemize}
-   \item wider testing
-   \item java
-   \item prepared rootfs/installation
 \end{itemize}
 \end{frame}
 
@@ -144,11 +182,15 @@
 \begin{itemize}
    \item Several EfikaMX devices donated by genesi!
    \begin{center}
-   \includegraphics[height=2cm]{genesi.jpg}
+   \includegraphics[height=1cm]{genesi.jpg}
    \end{center}
    \item Several PandaBoards devices donated by TI and PandaBoard community!
    \begin{center}
-   \includegraphics[height=2cm]{ti.jpg}
+   \includegraphics[height=1cm]{panda.png}
+   \end{center}
+   \item Several PandaBoards and Origen devices donated by ARM Holdings!
+   \begin{center}
+   \includegraphics[height=1cm]{arm.jpg}
    \end{center}
 \end{itemize}
 \end{frame}
