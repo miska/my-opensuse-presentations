@@ -11,6 +11,14 @@
 \author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Boosters}}
 \title{openSUSE \& ARM}
 
+\newcommand{\addhicon}[1]{\begin{picture}(0,0)(0,0)
+\put(230,-170){\includegraphics[height=.3\paperheight]{#1}}
+\end{picture}}
+
+\newcommand{\addwicon}[1]{\begin{picture}(0,0)(0,0)
+\put(210,-180){\includegraphics[width=.3\paperwidth]{#1}}
+\end{picture}}
+
 \begin{document}
 
 \begin{frame}[t,plain]
@@ -56,9 +64,9 @@
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{ARM examples: Beagle Board}
+\frametitle{ARM examples: Beagle and Panda Board}
 \begin{center}
-\includegraphics[height=6cm]{Beagle.jpg}
+\includegraphics[height=6cm]{beaglepanda.jpg}
 
 {\scriptsize Photo by me}
 \end{center}
@@ -73,30 +81,52 @@
 \end{center}
 \end{frame}
 
+\begin{frame}[t]
+\frametitle{ARM examples: HP Redstone Development Platform}
+\begin{center}
+\includegraphics[height=6cm]{hp.jpg}
+
+{\scriptsize Photo by HP}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{ARM examples: HP Redstone Development Platform}
+\addwicon{kattekrab-Mainframe.png}
+\begin{itemize}
+   \item Calxeda EnergyCore ARM Cortex processors
+   \item 288 servers in 4U
+   \item half rack
+   \begin{itemize}
+   	\item 1600 servers
+	\item 9.9kw
+	\item 1.2M USD
+   \end{itemize}
+\end{itemize}
+\end{frame}
+
 \sectionpage{openSUSE @ ARM}
 
 \begin{frame}[t]
 \frametitle{Little bit of history}
+\addhicon{nicubunu-scroll.png}
 \begin{itemize}
    \item started as GSoC in 2009
    \item died later because of lack of people
    \item popped up again this year on openSUSE Conference
-   \begin{itemize}
-   	\item several people wanted to have openSUSE on their gadgets
-	\item looked like enough people to start again
-	\item mailing list revived
-   \end{itemize}
    \item several people spend last hackweek reviving it
    \item busy since then, doing big progress
+   \item completely community project
 \end{itemize}
 \end{frame}
 
 \begin{frame}[t]
 \frametitle{Workflow}
+\addhicon{cybergedeon-man_at_work_square.png}
 \begin{itemize}
    \item we use Open Build Service
    \begin{itemize}
-   	\item actually two instances
+   	\item actually two ;-)
    \end{itemize}
    \item shadows openSUSE:Factory
    \item fixes goes directly (via devel projects) to the Factory
@@ -111,88 +141,101 @@
 
 \begin{frame}[t]
 \frametitle{Supported architectures}
+\addwicon{johnny_automatic-blueprints.png}
 armv7l
 \begin{itemize}
 \item \texttt{armv7-a} tuned for \texttt{cortex-a9}
 \item main focus
-\item kernels so far for \texttt{omap2+}, \texttt{tegra2} and \texttt{imx51}
+\item kernels so far for \texttt{omap2+}, \texttt{tegra2}, \texttt{imx51}, \texttt{u8500} and \texttt{exynos4}
 \item hard float \texttt{-neon +thumb +vfpv3-d16}
 \end{itemize}
 armv5el
 \begin{itemize}
-\item \texttt{armv5te}
 \item meant for maximum compatibility
 \item softfp \textit{-all} \texttt{-thumb}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{Building}
-Crosscompilation
+\frametitle{Special thanks}
 \begin{itemize}
-\item used just to bootstrap distribution
+   \item EfikaMX devices donated by genesi!
+   \begin{center}
+   \includegraphics[height=1cm]{genesi.jpg}
+   \end{center}
+   \item PandaBoards devices donated by TI and PandaBoard community!
+   \begin{center}
+   \includegraphics[height=1cm]{panda.png}
+   \end{center}
+   \item PandaBoards and Origen devices donated by ARM Holdings!
+   \begin{center}
+   \includegraphics[height=1cm]{arm.jpg}
+   \end{center}
 \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Building}
+\addwicon{gustavorezende-Mixer_Truck.png}
 Qemu
 \begin{itemize}
 \item building ARM port on our x86\_64 build farm
 \item user mode emulation + binfmt
 \item publicly accessible - \texttt{http://build.opensuse.org}
 \end{itemize}
+\vspace{0.5cm}
 Native build
 \begin{itemize}
 \item rebuilds everything natively on our ARM build farm
-\item hidden behind the walls
+\item hidden behind the walls - security reasons
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Kiwi}
+\addwicon{gnokii-kiwi.png}
+\begin{itemize}
+\item image builder
+\item self expandable images
+\item easy to deploy
+\begin{itemize}
+\item \texttt{dd if=image.raw of=/dev/sdb}
+\end{itemize}
+\item configuration ready for openSUSE JeOS
+\item highly configurable
+\item used by SUSE Studio
 \end{itemize}
 \end{frame}
 
 \begin{frame}[t]
 \frametitle{Troubles}
+\addwicon{marcoqf73-sad_kitten.png}
 GPU drivers
 \begin{itemize}
-\item closed source
+\item closed source, highly wip
 \item binary blobs for softfp only
 \end{itemize}
 Qemu
 \begin{itemize}
-\item sometimes not good enough emulation
+\item emulation is not perfect
 \item creating new process takes time
 \end{itemize}
-Native build - small RAM
-\begin{itemize}
-\item some packages runs out of memory during native build
-\item swap helps
-\end{itemize}
-Missing configuration for ARM
+Small RAM
 \end{frame}
 
 \begin{frame}[t]
+\addwicon{Muga-Forklift_Truck.png}
 \frametitle{What we have}
 \begin{itemize}
    \item still work in progress
    \item native build hosts
    \item vivid community
-   \item more then 4000 packages
+   \item more than 4000 packages
    \item about 500 to go in Factory
    \item hopes up for ARM support ready for 12.2 ;-)
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]
-\frametitle{Special thanks}
-\begin{itemize}
-   \item Several EfikaMX devices donated by genesi!
-   \begin{center}
-   \includegraphics[height=1cm]{genesi.jpg}
-   \end{center}
-   \item Several PandaBoards devices donated by TI and PandaBoard community!
-   \begin{center}
-   \includegraphics[height=1cm]{panda.png}
-   \end{center}
-   \item Several PandaBoards and Origen devices donated by ARM Holdings!
-   \begin{center}
-   \includegraphics[height=1cm]{arm.jpg}
-   \end{center}
-\end{itemize}
-\end{frame}
+\sectionpage{Thank you! Questions?}
 
 \end{document}
