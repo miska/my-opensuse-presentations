@@ -73,6 +73,15 @@
 \end{frame}
 
 \begin{frame}[t]
+\frametitle{ARM examples: Spykee}
+\begin{center}
+\includegraphics[height=6cm]{spykee.jpg}
+
+{\scriptsize Photo by meccanohig}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
 \frametitle{ARM examples: Panda Board build server}
 \begin{center}
 \includegraphics[height=6cm]{server.jpg}
@@ -210,10 +219,12 @@ Native build
 \begin{frame}[t]
 \frametitle{Troubles}
 \addwicon{marcoqf73-sad_kitten.png}
+Too many devices
 GPU drivers
 \begin{itemize}
 \item some closed source, some highly wip
 \item some only as binary blobs for softfp
+\item getting much better recently (Mali, \dots)
 \end{itemize}
 QEMU
 \begin{itemize}
@@ -233,6 +244,30 @@ Small RAM
    \item more than 4000 packages
    \item about 500 to go in Factory
    \item hopes up for ARM supported 12.2 ;-)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\addwicon{jonata_Mechanic.png}
+\frametitle{How can you help?}
+\begin{itemize}
+\item Fix packages
+\begin{itemize}
+   \item \texttt{osc branch openSUSE:Factory package home:NICK}
+   \item \texttt{osc co package home:NICK/package}
+   \item \texttt{cd home:NICK/package}
+   \item \textit{\dots fix it \dots}
+   \item \texttt{osc commit}
+   \item \texttt{osc sr}
+\end{itemize}
+\item Support your device
+\begin{itemize}
+   \item create kernel package for your device
+\end{itemize}
+\item Test it
+\begin{itemize}
+   \item chroot on your cell phone
+\end{itemize}
 \end{itemize}
 \end{frame}
 
