@@ -1,0 +1,237 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Boosters}}
+\title{Appstream}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\sectionpage{Package Management}
+
+\begin{frame}[fragile]
+\frametitle{Evolution - manual compilation}
+\begin{center}
+\begin{verbatim}
+gcc -c model.c
+gcc -c view.c
+gcc -c controler.c
+gcc *.o -o my_program
+cp my_program /usr/local/bin
+\end{verbatim}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Evolution - less manual compilation}
+\begin{center}
+\begin{verbatim}
+./configure
+make
+make install
+\end{verbatim}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Evolution - real package management}
+\begin{center}
+\begin{verbatim}
+zypper in my_program
+apt-get my_program
+\end{verbatim}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Evolution - user friendly package management}
+\begin{center}
+\includegraphics[height=6cm]{yast}
+
+\small YaST screenshot by fsse8info
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Evolution - what users want?}
+\begin{center}
+\includegraphics[height=6cm]{steam}
+
+\small Steam screenshot by factoryjoe
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Evolution - what users want?}
+\begin{center}
+\includegraphics[width=10cm]{play_store}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{What are we missing?}
+\begin{itemize}
+\item many pictures, colors, advertisements, \dots
+\pause
+\vspace{0.5cm}
+\item recommendations and suggestions
+\item screenshots
+\item rankings
+\item reviews
+\item users don't care about packages but about applications
+\end{itemize}
+\end{frame}
+
+\sectionpage{Appstream}
+
+\begin{frame}[t]
+\frametitle{Appstream}
+\begin{itemize}
+\item cross distribution effort
+\item focused on creating great upstream application installer
+\item started with meeting in January 2011 in Nurnberg
+\item people from Debian, Fedora, Mageia, openSUSE and Ubuntu
+\item attempt to decide what, how and where to do and how to collaborate
+\item trying to fix everything we were missing
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{General results}
+\begin{itemize}
+\item freedesktop.org and cross-distro mailing list are platforms to use
+\item some metadata should be shared
+\item working together makes sense
+\end{itemize}
+
+\vspace{1cm}
+
+{\Large Technologies to use}
+\begin{itemize}
+\item Ubuntu Software Center
+\item Debian screenshots application
+\item Open Collaboration Services
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Technologies to use}
+\begin{center}
+\includegraphics[height=6cm]{architecture}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Ubuntu Software Center}
+\begin{center}
+\includegraphics[height=6cm]{sw_centre}
+
+\small Ubuntu Software Centre screenshot from Wikipedia
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Ubuntu Software Center in 2011}
+\begin{itemize}
+\item looked like what users want
+\item closely tied to .deb
+\item CLA needed for contribution and not going away
+\item bazaar
+\item Gtk
+\item Python
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Ubuntu Software Center changes}
+\begin{itemize}
+\item GSoC 2011 - packagekit backend
+\begin{itemize}
+\item contributed by student back to Ubuntu
+\end{itemize}
+\item Boosters sprint in 2012
+\begin{itemize}
+\item forked and migrated to gitorious Appstream repo
+\item polished packagit backend
+\item created openSUSE configuration
+\item packaged it for openSUSE
+\item[\(\Rightarrow\)] almost works in openSUSE
+\end{itemize}
+\item GSoC 2012 - ???
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Apper}
+\begin{center}
+\includegraphics[height=6cm]{apper}
+
+\small Apper screenshot from kde-apps
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Apper}
+\begin{itemize}
+\item Qt package mannager on top of packagekit
+\item some efforts started to make use of extra metadata
+\item attempts to make it Qt alternative to software cennter
+\item upstream works on different approach
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Distromatch}
+\begin{itemize}
+\item written by Enrico Zini from Debian
+\item matches package names between distributions
+\item has API for queries
+\item needed for:
+\begin{itemize}
+\item find screenshots from other distribution
+\item find reviews from other distributions
+\item find patches from other distributions
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Distromatch - how does it work}
+Look into packages for
+\begin{itemize}
+\item package name
+\item desktop files
+\item binaries ([/usr]/bin/*)
+\item pkg-config files
+\item shared libraries
+\item man pages
+\item devel files
+\item stemmed versions of above
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{What is in openSUSE?}
+\begin{itemize}
+\item obs generates metadata
+\item Software Center dependencies are in
+\item Software Center just in obs, needs polishing
+\item new package search uses metadata and screenshots
+\end{itemize}
+\end{frame}
+
+\sectionpage{Thank you! Questions?}
+
+\end{document}
+
