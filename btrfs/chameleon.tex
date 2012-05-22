@@ -19,43 +19,46 @@
 
 \sectionpage{Btrfs}
 
-\begin{frame}
-\frametitle{What is Btrfs?}
-\begin{center}
-\Huge New super cool filesystem!!!
-\end{center}
+\begin{frame}[t]
+\frametitle{What is btrfs?}
+\begin{itemize}
+	\item cow filesystem
+	\item accepted to 2.6.29 in 2009
+	\item developed by Oracle
+	\item still considered experimental
+	\item implements many cool features
+\end{itemize}
 \end{frame}
 
 \begin{frame}[t]
-\frametitle{What's so cool?}
+\frametitle{What can btrfs do?}
 \begin{itemize}
-   \item supports several subvolumes per filesystem
-   \item supports filesystem over multiple block devices
-   \item transparent compression available
+   \item several separately root subvolumes per filesystem
+   \item transparent compression (zlib or LZO)
    \item filesystem snapshots
    \item cow not only for snapshot but for files as well
-   \item online block device addition and removal
-   \item online volume growth/shrink
    \item checksums for data and metadata
+   \item in place ext3/4 conversion with rollback
 \end{itemize}
 \end{frame}
 
 \begin{frame}[t]
 \frametitle{What else?}
-\begin{center}
 \begin{itemize}
-   \item in place ext3/4 conversion
-   \begin{itemize}
-      \item convert your old partitions!
-      \item became just on of the snapshots
-      \item returning to ext3/4 possible
-   \end{itemize}
-   \item no check/recovery tool yet
-   \begin{itemize}
-      \item you can lost your data 
-   \end{itemize}
+	\item online volume growth and shrink
+   \item RAID 1, RAID 0, RAID 10
+	\item online addition and removal of block devices
+	\item online balancing
+	\item online defragmentation
 \end{itemize}
-\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Two points against btrfs}
+\begin{itemize}
+	\item no filesystem check tool
+	\item sometimes misleading calculation of free space
+\end{itemize}
 \end{frame}
 
 \sectionpage{Snapper}
@@ -81,7 +84,7 @@
 \begin{itemize}
    \item \textbf{single}
    \begin{itemize}
-      \item simple snapshots with no realation to the others
+      \item simple snapshots with no relation to the others
    \end{itemize}
    \item \textbf{timeline}
    \begin{itemize}
