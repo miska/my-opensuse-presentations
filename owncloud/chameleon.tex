@@ -1,0 +1,119 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+\usepackage[utf8]{inputenc}
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Boosters}}
+\title{Jak na vlastní mrak}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\sectionpage{Trocha historie}
+
+\begin{frame}
+\frametitle{Cca pravěk}
+\begin{center}
+\includegraphics[height=.7\paperheight]{SeriousTux-RockArt-AncientAstronauts}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobilní verze}
+\begin{center}
+\includegraphics[height=.7\paperheight]{j4p4n-egyption-tablet}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cca středověk}
+\begin{center}
+\includegraphics[height=.7\paperheight]{Anonymous_old_book}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobilní verze}
+\begin{center}
+\includegraphics[height=.7\paperheight]{Degri_Notepad_Pencil}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Minulé století}
+\begin{center}
+\includegraphics[height=.7\paperheight]{AJ_Computer}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mobilní verze}
+\begin{center}
+\includegraphics[height=.7\paperheight]{Palm}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Extra mobilní verze}
+\begin{center}
+\includegraphics[height=.7\paperheight]{Cloud_computing}
+\end{center}
+\end{frame}
+
+\sectionpage{ownCloud}
+
+\begin{frame}[t]
+\frametitle{Vlastnosti dat v běžných cloudech}
+\begin{itemize}
+\item[+] data dostupná odkudkoliv
+\item[+] stejná data všude
+\item[+] často možná synchronizace s offline úložištěm
+\item[+] snadné sdílení
+\item[--] cloudy bez synchronizace hrozí lock-inem
+\item[--] správce cloudu o vás ví hodně
+\item[--] bezpečnost vašich dat nezávisí na vás
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Co je ownCloud}
+\begin{itemize}
+\item open source software
+\item web aplikace
+\item synchronizační klienti
+\item každý může mít vlastní mrak
+\item podporuje standardy
+\begin{itemize}
+\item soubory - WebDAV
+\item kalendář - CalDAV
+\item kontakty - CardDAV
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\sectionpage{Demo}
+
+\begin{frame}[t]
+\frametitle{Požadavky}
+\begin{itemize}
+\item webserver
+\item php
+\item SQL databáze (SQLite, MySQL, \dots)
+\vspace{.5cm}
+\item[\(\Rightarrow\)] stačí libovolný webhosting
+\end{itemize}
+\end{frame}
+
+
+\sectionpage{Otazky?}
+
+\end{document}
+
