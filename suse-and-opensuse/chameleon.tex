@@ -1,0 +1,99 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\usepackage{ulem}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}}
+\title{SUSE and openSUSE}
+\institute{openSUSE Team}
+
+\newcommand{\addhicon}[1]{\begin{picture}(0,0)(0,0)
+\put(230,-170){\includegraphics[height=.3\paperheight]{#1}}
+\end{picture}}
+
+\newcommand{\addwicon}[1]{\begin{picture}(0,0)(0,0)
+\put(210,-180){\includegraphics[width=.3\paperwidth]{#1}}
+\end{picture}}
+
+\definecolor{darkgreen}{RGB}{0,99,0}
+\definecolor{darkblue}{RGB}{0,0,99}
+\definecolor{darkred}{RGB}{99,0,0}
+
+\begin{document}
+
+\titlepage
+
+\begin{frame}[t]
+\frametitle{Little history - SUSE}
+
+\begin{itemize}
+\item[1992] SUSE started by distributing SLS and Slackware, UNIX manuals and technical assistance
+\item[1994] SuSE Linux 1.0 - German translation of Slackware
+\item[1996] Our own Linux distribution, first release 4.2 with YaST 0.42
+\end{itemize}
+
+\vspace{.5cm}
+
+\begin{itemize}
+\item Boxed editions were sold
+\item Distribution available on FTPs few months after boxed edition released
+\item Development and testing completely behind closed doors.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Little history - openSUSE}
+
+\begin{itemize}
+\item[2005] "openSUSE Project"
+\begin{itemize}
+\item SUSE allowed community to test betas of SUSE Linux 10.0
+\end{itemize}
+\item[2006] SUSE Linux 10.2 \(\Rightarrow\) openSUSE 10.2
+\item[2007] obs released
+\item[2008] idea of Contrib
+\item[2008] openSUSE 11.1 built completely with obs
+\item[2009] 11.2 with Contrib released
+\item[2011] 12.1 Contrib deprecated, Factory open
+\end{itemize}
+
+\vspace{.5cm}
+
+Anybody can contribute and all development is open.
+
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{openSUSE vs SUSE}
+
+openSUSE is upstream for SLE
+
+\begin{itemize}
+\item SLE 10 - based on openSUSE 10.1
+\item SLE 11 - based on openSUSE 11.1
+\end{itemize}
+
+SUSE is the biggest sponsor of openSUSE
+
+\vspace{.5cm}
+
+\begin{tabular}{l|c|c}
+& openSUSE & SLE\\
+\hline
+packages & 6k src packages & limited tested subset\\
+fixes & 2 18 months & 7 years, extended to 10\\
+support & community & paid support available
+\end{tabular}
+
+\end{frame}
+
+\end{document}
+
