@@ -1,0 +1,127 @@
+\sectionpage{RPM}
+
+\begin{frame}[t]
+   \frametitle{Basic information}
+   \begin{itemize}
+	\item one of the oldest in Linux world
+	\item created in 1997 for RedHat
+	\item used by various distributions
+	\begin{itemize}
+		\item RedHat/Fedora and derivates
+		\item openSUSE/SLE, Mandriva/Mageia, Meego, \dots
+	\end{itemize}
+	\item several frontends to make operations easier
+	\begin{itemize}
+		\item yum - used by RedHat/Fedora and derivates
+		\item zypper - used by openSUSE/SLE and Meego
+		\item urpmi - used by Mandriva/Mageia
+	\end{itemize}
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]
+   \frametitle{File format}
+   \begin{itemize}
+      \item 32 bytes lead (magic, rpm version, type of package, architecture)
+      \item signature
+      \item header
+      \begin{itemize}
+         \item name, version and release
+         \item license
+         \item summary
+         \item description
+         \item changelog
+         \item requires and provides
+         \item file list with rights, md5s and more
+      \end{itemize}
+      \item archive
+      \begin{itemize}
+	\item cpio, compressed by gzip, bzip2, xz, \dots
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]
+   \frametitle{\texttt{.spec} file}
+   \begin{itemize}
+      \item source recipe for \texttt{rpm}
+      \item contains multiple sections
+      \begin{itemize}
+         \item information about package
+         \item \texttt{\%prep} section
+         \item \texttt{\%build} section
+         \item \texttt{\%install} section
+         \item \texttt{\%check} section
+         \item \texttt{\%files} section
+         \item optionally more: \texttt{\%pre}, \texttt{\%post}, \dots
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,t]
+	\frametitle{Example .spec file (1/3)}
+	\subsection{Example .spec file}
+	\begin{small}
+	\begin{verbatim}
+Name:           nano  
+BuildRequires:  ncurses-devel  
+Url:            http://www.nano-editor.org/  
+License:        GPL v3 or later  
+Group:          Productivity/Editors/Other  
+Summary:        Pico Editor Clone with Enhancements  
+Version:        2.1.9  
+Release:        1  
+Source:         %{name}-%{version}.tar.bz2  
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build  
+
+%description  
+GNU nano is a small and friendly text editor. It aims to emulate the  
+Pico text editor while also offering a few enhancements.
+...
+
+	\end{verbatim}
+	\end{small}
+\end{frame}
+\begin{frame}[fragile,t]
+	\frametitle{Example .spec file (2/3)}
+	\begin{small}
+	\begin{verbatim}
+%prep  
+%setup -q 
+ 
+%build  
+%configure --disable-rpath --enable-all  
+%{__make} %{?jobs:-j%jobs}  
+  
+%install  
+%make_install  
+%find_lang %{name}
+  
+%check  
+make check  
+
+	\end{verbatim}
+	\end{small}
+\end{frame}
+\begin{frame}[fragile,t]
+	\frametitle{Example .spec file (2/3)}
+	\begin{small}
+	\begin{verbatim}
+%files -f %{name}.lang  
+%defattr(-, root, root)  
+%doc AUTHORS BUGS COPYING ChangeLog INSTALL NEWS README THANKS TODO UPGRADE  
+%{_mandir}/fr  
+%{_mandir}/fr/man?  
+%{_mandir}/man?/*.*  
+%{_mandir}/*/man?/*.*  
+%{_bindir}/*  
+%{_infodir}/*.gz  
+%{_datadir}/nano  
+  
+%changelog
+	\end{verbatim}
+	\end{small}
+\end{frame}
+

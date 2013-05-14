@@ -1,0 +1,75 @@
+\sectionpage{Portage}
+
+\begin{frame}[t]
+   \frametitle{Basic information}
+   \begin{itemize}
+	\item created for Gentoo distribution
+	\item doesn't focus on binary packages
+   \item used mainly in Gentoo Linux
+   \item used by Gentoo/Alt project
+	\begin{itemize}
+		\item Gentoo/FreeBSD
+		\item Gentoo prefix
+	   \begin{itemize}
+         \item Linux, MacOS, HP-UX, Solaris, Windows, ...
+	   \end{itemize}
+	\end{itemize}
+   \item usually only source packages to be compiled
+   \item provides means for customisation
+   \item supports inheritance
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{Supported functions}
+   \begin{itemize}
+   \item \texttt{pkg\_setup} - pre-build environment configuration and checks
+   \item \texttt{src\_unpack} - unpacking sources
+   \item \texttt{src\_prepare} - patching
+   \item \texttt{src\_compile} - compilation itself
+   \item \texttt{src\_test} - optional testing
+   \item \texttt{src\_install} - installation
+   \item \texttt{pkg\_preinst}, \texttt{pkg\_postinst}, \texttt{pkg\_prerm}, \texttt{pkg\_postrm}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,t]
+	\frametitle{Example .ebuild file (1/2)}
+	\subsection{Example .ebuild file}
+	\begin{small}
+   \begin{verbatim}
+EAPI=4
+
+inherit libtool
+
+DESCRIPTION="GNU charset conversion library for libc which doesn't implement it"
+HOMEPAGE="http://www.gnu.org/software/libiconv/"
+SRC_URI="ftp://ftp.gnu.org/pub/gnu/libiconv/${P}.tar.gz"
+
+LICENSE="LGPL-2.1"
+SLOT="0"
+KEYWORDS="~amd64 ~ppc ~sparc ~x86"
+IUSE="nls"
+
+DEPEND="!sys-libs/glibc"
+	\end{verbatim}
+	\end{small}
+\end{frame}
+\begin{frame}[fragile,t]
+	\frametitle{Example .ebuild file (1/2)}
+	\begin{small}
+   \begin{verbatim}
+
+src_prepare() {
+   # Make sure that libtool support is updated to link "the linux way"
+   # on FreeBSD.
+   elibtoolize
+}
+
+src_configure() {
+    econf $(use_enable nls)
+}
+	\end{verbatim}
+	\end{small}
+\end{frame}
+

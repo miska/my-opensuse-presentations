@@ -1,0 +1,62 @@
+\sectionpage{Bitbake}
+
+\begin{frame}[t]
+   \frametitle{Basic information}
+   \begin{itemize}
+	\item created for OpenEmbedded (meta-distribution)
+	\item supports multiple build and target operating systems
+	\item builds whole distribution
+	\item reuses staging directory
+	\item focuse on binary packages
+   \item supports inheritance
+   \item inspired by portage
+	\item Final package can be .rpm, .deb, .opkg, .tgz, \dots
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Example BitBake recipe}
+	\subsection{Example BitBake recipe}
+	\begin{small}
+	\begin{verbatim}
+DESCRIPTION = "GNU nano (Nano's ANOther editor, or 
+Not ANOther editor) is an enhanced clone of the 
+Pico text editor."
+HOMEPAGE = "http://www.nano-editor.org/"
+LICENSE = "GPLv2"
+SECTION = "console/utils"
+DEPENDS = "ncurses"
+SRC_URI = "http://www.nano-editor.org/dist/v2.0/nano-${PV}.tar.gz \
+           file://glib.m4"
+inherit autotools
+EXTRA_OECONF = "--enable-all"
+
+do_configure_prepend () {
+           install -m 0644 ${WORKDIR}/glib.m4 m4/
+}
+	\end{verbatim}
+	\end{small}
+\end{frame}
+
+\begin{frame}[fragile,t]
+	\frametitle{Another BitBake example}
+	\subsection{Another BitBake example}
+	\begin{small}
+	\begin{verbatim}
+...
+
+PACKAGES_DYNAMIC = "libpurple-protocol-*"
+python populate_packages_prepend () {
+       purple   = bb.data.expand('${libdir}/purple-2', d)
+
+       do_split_packages(d, purple, '^lib(.*)\.so$',
+              output_pattern='libpurple-protocol-%s',
+              description='Libpurple protocol plugin for %s',
+              prepend=True, extra_depends='')
+
+}
+
+...
+	\end{verbatim}
+	\end{small}
+\end{frame}
