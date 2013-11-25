@@ -68,12 +68,12 @@
 Name:           nano  
 BuildRequires:  ncurses-devel  
 Url:            http://www.nano-editor.org/  
-License:        GPL v3 or later  
+License:        GPL-3.0+
 Group:          Productivity/Editors/Other  
 Summary:        Pico Editor Clone with Enhancements  
 Version:        2.1.9  
-Release:        1  
-Source:         %{name}-%{version}.tar.bz2  
+Release:        0
+Source:         http://url/%{name}-%{version}.tar.bz2  
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build  
 
 %description  
@@ -93,14 +93,14 @@ Pico text editor while also offering a few enhancements.
  
 %build  
 %configure --disable-rpath --enable-all  
-%{__make} %{?jobs:-j%jobs}  
+make %{?_smp_mflags} 
   
 %install  
 %make_install  
 %find_lang %{name}
   
 %check  
-make check  
+make check %{?_smp_mflags}
 
 	\end{verbatim}
 	\end{small}
