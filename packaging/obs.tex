@@ -1,0 +1,128 @@
+\begin{frame}[t]
+   \frametitle{What is Open Build Service?}
+   \addhicon{yves_guillou_question.png}
+   \begin{itemize}
+      \item builds packages
+      \item open source server application
+      \begin{itemize}
+         \item you can get your own instance
+         \item API between instances
+      \end{itemize}
+      \item being used to develop openSUSE, SLE, Meego and others
+      \item developed mainly by SUSE
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{What can it do?}
+   \begin{itemize}
+      \item Distribute builds among build servers
+      \item Follow dependencies
+      \item Build packages for different distributions:
+      \begin{itemize}
+         \item openSUSE/SLE
+         \item Fedora/RHEL/CentOS
+         \item Mandriva
+         \item Debian/Ubuntu
+         \item ...
+      \end{itemize}
+      \item Create repositories for these distribution
+      \item Build packages different architectures:
+      \begin{itemize}
+         \item i586/x86\_64
+         \item arm/PPC/PPC64
+         \item ...
+      \end{itemize}
+      \item Push packages to the mirrors
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{Can it build more?}
+   \addwicon{gnokii-kiwi.png}
+   \begin{itemize}
+      \item Build packages for architectures you don't have
+      \begin{itemize}
+         \item qemu-user
+         \item \texttt{binfmt}
+      \end{itemize}
+      \item Build images - kiwi
+      \begin{itemize}
+         \item image builder
+         \item self expandable images
+         \item easy to deploy
+         \item highly configurable
+         \item used by SUSE Studio
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{From what can it build?}
+   \begin{itemize}
+      \item Behaves like VCS
+      \begin{itemize}
+         \item \texttt{osc co}
+         \item \texttt{osc commit}
+         \item \texttt{osc log}
+         \item \texttt{osc diff}
+      \end{itemize}
+      \item Your own VCS - git, subversion, ...
+      \begin{itemize}
+         \item clone \& create tarball
+         \item download tarball
+         \item extract and modify recipe
+         \item compile
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{What else can it do?}
+   \begin{itemize}
+      \item Hidden projects
+      \begin{itemize}
+         \item Usefull for security
+         \item Some patches can't be made public for some time
+      \end{itemize}
+      \item Submit requests
+      \begin{itemize}
+         \item User creates patched version
+         \item User sends it to another project
+         \item Maintainers review the request
+         \item Maintainers accept/decline request
+      \end{itemize}
+      \item Maintenance requests
+      \begin{itemize}
+         \item Special kind of submit request
+         \item One request for multiple projects
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+   \frametitle{Architecture}
+   \begin{center}
+   \includegraphics[width=8cm]{obs}
+   \end{center}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{How to get started?}
+   \begin{itemize}
+      \item Try openSUSE Build service
+      \vspace{0.1cm}
+      \begin{center}\url{http://build.opensuse.org}\end{center}
+      \vspace{0.1cm}
+      \item Get obs appliance from SUSE Studio
+      \vspace{0.1cm}
+      \begin{center}\url{http://www.susestudio.com}\end{center}
+      \vspace{0.1cm}
+      \item Get code and news from obs website
+      \vspace{0.1cm}
+      \begin{center}\url{http://www.buildservice.org}\end{center}
+   \end{itemize}
+\end{frame}
+
+\sectionpage{Thank you! Questions?}

@@ -1,0 +1,39 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\usepackage{ulem}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}}
+\title{Software Packages}
+\institute{openSUSE Team}
+
+\newcommand{\addhicon}[1]{\begin{picture}(0,0)(0,0)
+\put(230,-170){\includegraphics[height=.3\paperheight]{#1}}
+\end{picture}}
+
+\newcommand{\addwicon}[1]{\begin{picture}(0,0)(0,0)
+\put(210,-180){\includegraphics[width=.3\paperwidth]{#1}}
+\end{picture}}
+
+\definecolor{darkgreen}{RGB}{0,99,0}
+\definecolor{darkblue}{RGB}{0,0,99}
+\definecolor{darkred}{RGB}{99,0,0}
+
+\begin{document}
+
+\titlepage
+
+\input{motivation}
+\input{rpm}
+\input{needs}
+\input{obs}
+
+\end{document}
+

@@ -1,0 +1,67 @@
+\sectionpage{Software Packages - what and why}
+
+\begin{frame}[t]
+   \frametitle{What is software package?}
+   \addhicon{secretlondon-green_present.png}
+   \begin{itemize}
+      \item archive with files to be installed
+      \item metadata for package manager
+      \item most common are \texttt{.rpm} and \texttt{.deb}
+   \end{itemize}
+   \vspace{.5cm}
+   Usual metadata:
+      \begin{itemize}
+         \item description
+         \item license
+         \item dependencies
+         \item extra installation instructions
+         \item checksums
+      \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{Why do we need them?}
+   Convenience
+   \begin{itemize}
+      \item easy installation
+      \item easy update
+      \item clean uninstall
+      \item easy distribution of software
+   \end{itemize}
+   \vspace{.5cm}
+   Security
+   \begin{itemize}
+      \item avoid development tools on production machines
+      \item detect tempering
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \addhicon{netalloy-gears.png}
+   \frametitle{Life without packages}
+   \begin{itemize}
+      \item Get a tarball
+      \item Find out dependencies
+      \item Build and install dependencies
+      \item Build and install package itself
+      \begin{itemize}
+         \item \texttt{./configure --prefix=/usr --enable-this \(\backslash\) \newline --disable-that --with-lib=there}
+         \item \texttt{make}
+         \item fix what is broken
+         \item \texttt{make install}
+         \item try it
+         \item \texttt{make uninstall}
+         \item clean up left-overs
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \addhicon{netalloy-gears.png}
+   \frametitle{Life with packages}
+   \begin{itemize}
+      \item \textit{pkg-manager} \texttt{install pkg}
+      \item \textit{pkg-manager} \texttt{remove pkg}
+   \end{itemize}
+\end{frame}
+
