@@ -1,0 +1,92 @@
+\documentclass[xcolor={usenames,dvipsnames,svgnames}]{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Boosters}}
+\title{PGP and CACert}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+
+\begin{frame}
+\includegraphics[width=11cm]{hiring}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{Motivation}
+\vspace{.3cm}
+   \textit{Alice meets Bob, wants to chat, Mallory is jealous, wants to break them apart, Eve is just a harmless stalker, \dots}
+\pause
+
+\vspace{.8cm}
+   {\Large Problem with mails and web}
+\vspace{.3cm}
+   \begin{itemize}
+       \item communication is plain text
+       \item can and is relayed through multiple machines
+       \item anybody could pretend to be anybody
+       \begin{itemize}
+           \item partially fixed by DKIM, DNSSEC
+       \end{itemize}
+   \end{itemize}
+\vspace{.5cm}
+
+\vspace{.3cm}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{Little bit of theory}
+   {\Large Symmetric ciphers}
+   \begin{itemize}
+	\item same key for encryption and decryption
+	\item both parties have to share same secret
+	\item hard to exchange the secret key
+   \end{itemize}
+   \vspace{.5cm}
+   {\Large Asymmetric ciphers}
+   \begin{itemize}
+	\item two keys - public and private
+	\item Alice uses her private and Bobs public to encrypt
+	\item Bob uses his private and Alices public to decrypt
+	\item slower than symmetric
+	\item identity verification is hard
+   \end{itemize}
+\end{frame}
+\sectionpage{PGP}
+
+\input{gpg}
+
+\sectionpage{X.509 and CACert}
+
+\input{ssl}
+
+\input{cacert}
+
+\begin{frame}[t,fragile]
+   \frametitle{Thank you!}
+\begin{center}
+\Large
+   Questions?
+
+\vspace{1cm}
+Sign my PGP key ;-)
+
+\vspace{.5cm}
+\verb|3365 1176 E9C0 C50C 8008|
+
+\verb|16F7 7339 181E F3B4 FD9A|
+\end{center}
+\end{frame}
+
+\end{document}
+

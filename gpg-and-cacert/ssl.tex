@@ -1,0 +1,44 @@
+\begin{frame}[t]
+   \frametitle{X.509}
+   \begin{itemize}
+      \item issued in 1988
+      \item binds public key to name
+      \item hierarchical approach
+      \item you generate your keys
+      \begin{itemize}
+         \item http://www.root.cz/clanky/jak-na-openssl-2
+      \end{itemize}
+      \item trusted CAs signs your keys
+      \begin{itemize}
+         \item after your verification
+         \item after payment
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{SSL}
+   \textcolor{BlueViolet}{Client:} Hello
+
+   \textcolor{DarkGreen}{Server:} Hello, my certificate is this give me yours
+
+   \textcolor{BlueViolet}{Client:} Here is mine
+
+   \textcolor{DarkSlateGray}{\textit{Client generates random number}}
+
+   \textcolor{BlueViolet}{Client:} Let's agree on secret
+
+   \textcolor{BlueViolet}{Client:} Here it is encrypted with your public key
+
+   \textcolor{DarkSlateGrey}{\textit{Client and Server generates symmetric keys from secret}}
+
+   \textcolor{BlueViolet}{Client:}\textcolor{red}{[cr]} So far we talked about \dots \textcolor{red}{[/cr]}
+
+   \textcolor{DarkSlateGrey}{\textit{Server verifies}}
+   
+   \textcolor{DarkGreen}{Server}\textcolor{red}{[cr]}: So far we talked about \dots \textcolor{red}{[/cr]}
+   
+   \textcolor{DarkSlateGrey}{\textit{Client: verifies}}
+
+   \textit{\dots data \dots}
+\end{frame}

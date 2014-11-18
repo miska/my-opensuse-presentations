@@ -1,0 +1,121 @@
+\begin{frame}[t]
+   \frametitle{History}
+   \begin{itemize}
+      \item[1977] Ron Rivest, Adi Shamir and Leonard Adleman published RSA
+      \item[1991] Phil Zimmermann wrote PGP
+      \begin{itemize}
+         \item made it available including sources
+      \end{itemize}
+      \item[1992] Web of Trust protocol - PGP 2.0
+      \item[1993] criminal investigation of Zimmermann
+      \begin{itemize}
+         \item "munitions export without a license"
+      \end{itemize}
+      \item[1995] book with sources
+      \item[1996] criminal investigation ended, PGP Inc. founded
+      \item[1997] OpenPGP proposed to IETF
+      \item[1998] RFC2440 OpenPGP message format
+      \item[1999] GPG 1.0 released
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{Features}
+   \begin{itemize}
+      \item two keys
+      \begin{itemize}
+         \item public key
+         \item private key
+      \end{itemize}
+      \item signing
+      \item encryption
+      \item decentralized
+      \item inline signing/encryption
+      \item mime signing/encryption
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Workflow: Encryption}
+   \begin{center}
+   \includegraphics[height=3cm]{encrypt-pgp}
+   \end{center}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Workflow: Decryption}
+   \begin{center}
+   \includegraphics[height=3cm]{decrypt-pgp}
+   \end{center}
+\end{frame}
+
+\begin{frame}[t]
+   \frametitle{signing-party - \texttt{caff}}
+   {\small \hfill http://pgp-tools.alioth.debian.org/}
+   \vspace{.5cm}
+
+   \begin{itemize}
+      \item tool to help with key signing
+      \item requires working sendmail (or alternative)
+      \item downloads keys from internet
+      \item shows fingerprints
+      \item signs the keys
+      \item sends identities to the owner
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[t,fragile]
+   \frametitle{\texttt{caff} usage}
+\tiny
+\begin{verbatim}
+$ caff 7339181EF3B4FD9A
+
+...
+
+[ unknown] (4)  Michal Hrusecky <Michal.Hrusecky@opensuse.org>
+
+Really sign all user IDs? (y/N) y
+pub  1024D/F3B4FD9A  created: 2008-12-30  expires: 2016-12-31  usage: SC  
+ Primary key fingerprint: 3365 1176 E9C0 C50C 8008  16F7 7339 181E F3B4 FD9A
+
+...
+
+Are you sure that you want to sign this key with your
+key "Michal Hrusecky <Michal.Hrusecky@seznam.cz>" (A3920BE1)
+
+Really sign? (y/N) 
+
+...
+
+Mail signature for Michal Hrusecky <Michal@Hrusecky.net> to 'Michal@Hrusecky.net'? [Y/n]
+
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[t,fragile]
+   \frametitle{\texttt{.caffrc}}
+\begin{verbatim}
+$CONFIG{'owner'} = 'Michal Hrusecky';
+$CONFIG{'email'} = 'Michal@Hrusecky.net';
+$CONFIG{'keyid'} = [ qw{ 7339181EF3B4FD9A ... } ];
+$CONFIG{'mailer-send'} =  [ '/usr/bin/msmtp-enqueue.sh' ];
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[t,fragile]
+   \frametitle{\texttt{.msmtprc}}
+\begin{verbatim}
+defaults
+tls on
+logfile ~/.msmtp.log
+
+account mail
+port 587
+tls_trust_file ~/.mail_cert
+host mail.hrusecky.net
+from michal@hrusecky.net
+auth on
+user michal@hrusecky.net
+password XXXXXXXXX
+\end{verbatim}
+\end{frame}
