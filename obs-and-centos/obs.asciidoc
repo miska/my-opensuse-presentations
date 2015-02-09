@@ -1,0 +1,316 @@
+Open Build Service+++<br/>+++ Good, Bad & Ugly
+==============================================
+:author: Michal Hrušecký
+:backend: deckjs
+:title: OBS: Good, Bad and Ugly
+:description: Open Build Service
+:deckjs_theme: dark-green-draft
+:deckjs_transition: fade
+:source-highlighter: pygments
+:pygments_style: native
+
+Who am I
+--------
+
+* openSUSE packager for several years
+* openSUSE Booster for several years
+** we helped with latest few openSUSE releases
+* currently opensource SW developer @ Eaton
+** partially responsible for us adopting OBS
+** maintaining our OBS instance
+
+Making a distribution
+---------------------
+
+* multiple continuous streams of package sources going in
+* binary packages going out
+* ISOs going out
+* updates to the stable packages
+** probably some QA and security involved
+* signing somewhere in the middle
+* one or more hard-working guys trying to balance everything
+** and keep everyone else happy/not so angry
+
+What is OBS
+-----------
+
+Open Build Service
+
+[incremental="true"]
+* opensource software
+** you can use it!
+* builds stuff
+** stuff being packages or images mainly
+* service running on server
+** can be used by multiple users
+** can build more stuff at once
+** can use more build nodes
+
+Cool features
+-------------
+
+* builds stuff
+[incremental="true"]
+** builds stuff on top of other stuff
+* manages requests
+* can easily create repositories
+* can import built packages and srpms
+* +qemu-user+ support out of the box
+
+Incoming streams
+----------------
+
+* people can release their add-on repositories
+** calms inpatient developers and users
+* divide and conquer
+** QA can help
+*** especially openQA
+** staging projects can help
+** multiple review levels can be helpful
+** visible state we are at is nice
+
+ifdef::backend-deckjs[<<<]
+
+image::requests.png[Request queue]
+
+ifdef::backend-deckjs[<<<]
+
+image::review.png[Reviews]
+
+openSUSE Tumbleweed
+-------------------
+
+["graphviz", "tumbleweed.png"]
+---------------------------------------------------------------------
+digraph factory {
+  rankdir=LR;
+  ranksep=0.5;
+  nodesep=1;
+
+  graph [bgcolor="#ffffff00" fontcolor=white sep="+20"]
+  node [ color="white" fontcolor=white, penwidth=2]
+  edge [ color="white" fontcolor=white, penwidth=4, arrowsize=2]
+
+  devel [ label="Devel project" ]
+  tumbleweed [ label="Tumbleweed" ]
+  openqa [ label="openQA" ]
+  review [ label="Reviews" ]
+  staging [ label="Staging project" ]
+  user [ label="User" ]
+
+  devel -> tumbleweed [ label = "waits for accepting", color=gray, style=dashed , penwidth=2, arrowsize=1];
+  devel -> review [ label = "requests need review", color=green ];
+  review -> tumbleweed [ label = "approve request", color=green ]
+  staging -> tumbleweed [ label = "approve request", color=green ]
+  devel -> staging [ label = "requests tested in staging", color=green ];
+  staging -> openqa [ label = "openQA approval", color=green ];
+  openqa -> staging [ label = " ", color=green ];
+  tumbleweed -> openqa [ label = "test before publishing", color=cyan ];
+  openqa -> user [ label = "approve publishing", color=cyan ];
+  tumbleweed -> user [ label = "waits openQA approval", color=gray, style=dashed, penwidth=2, arrowsize=1];
+
+  {rank=same; staging review openqa }
+  {rank=same; tumbleweed user }
+}
+---------------------------------------------------------------------
+
+Dealing with publishing stream
+------------------------------
+
+* basically automatic
+** publishes once everything is done
+** signs everything
+** displays the progress
+** triggers rebuilds when needed
+* accept the request and OBS will do the rest
+
+Bad and ugly
+------------
+
+* own version control
+** no git, sorry
+* only suse-build script for building
+* written in multiple languages
+** backend in Perl
+** frontend in RoR
+** cli in Python
+** build script in Bash
+
+Own version control
+-------------------
+
+* actually not that bad
+* there are _services_
+** can fetch sources from vcs
+** can fetch tarballs from web
+** can do simple modifications
+** you can write your own
+
+Upstream service
+----------------
+
+[source,xml]
+-------------------------------------------------------------------------------
+<services>
+ <service name="tar_scm">
+  <param name="scm">git</param>
+  <param name="url">git://github.com/me/my.git</param>
+  <param name="versionprefix">0.4.git</param>
+  <param name="filename">my-project</param>
+  <param name="revision">v4.0</param>
+ </service>   <service name="extract_file">
+  <param name="archive">*.tar</param>
+  <param name="files">rpm/*.spec</param>
+ </service>   <service name="recompress">
+  <param name="file">*git*.tar</param>
+  <param name="compression">gz</param>
+ </service>   <service name="set_version"/>
+</services>
+-------------------------------------------------------------------------------
+
+What we use @ Eaton
+-------------------
+
+[source,xml]
+-------------------------------------------------------------------------------
+<services>
+ <service name="git_nas"/>
+</services>
+-------------------------------------------------------------------------------
+
+* repository path taken from package name
+** directory per package with recipes
+* _branch_ taken from project path
+* sources tarball taken from _sources_ file
+** name and hash stored in git
+** url to tarball made from name and hash
+
+Multiple languages
+------------------
+
+* everybody can contribute :-)
+** perl, bash, python, ruby
+* per part consistent language
+* services can be in any language
+** more languages are welcome :-)
+
+suse-build script
+-----------------
+
+* doesn't use mock
+** has similar functionality
+* can build various packages
+** rpms
+** debs
+** archlinux packages
+** images
+
+ifdef::backend-deckjs[<<<]
+
+* can be extended to do more
+** requires digging in OBS as well
+** remember the multiple languages part
+* can be bend to do what you want
+** ugly, but quite easy :-)
+** as long as you want rpm, deb, images...
+
+Building CentOS
+---------------
+
+* initial run
+** just imported source and binary RPMs
+** let it build
+
+image:slope.png["Building it"]
+
+First results
+-------------
+
+image::first_run.png["Results of first run"]
+
+What failed
+-----------
+
+-------------------------------------------------------------------------------
+Processing files: atlas-debuginfo-3.10.1-7.1.x86_64
+error: Could not open %files file /home/abuild/rpmbuild/BUILD/ATLAS/debugfiles.list: No such file or directory
+
+
+RPM build errors:
+    Could not open %files file /home/abuild/rpmbuild/BUILD/ATLAS/debugfiles.list: No such file or directory
+-------------------------------------------------------------------------------
+
+Let's work around it
+--------------------
+
+* present in 235 out of 297
+
+-------------------------------------------------------------------------------
+sed -i 's|\(%build\)|\1\ntouch\ debugfiles.list|' $i
+-------------------------------------------------------------------------------
+
+* let's see how effective this fix is
+
+Second results
+--------------
+
+image::second_run.png["Results of second run"]
+
+What else failed
+----------------
+
+-------------------------------------------------------------------------------
+ File not found: /.../man1/ccmake.1.gz
+ File not found: /.../man1/cmake.1.gz
+ File not found: /.../nettle.info.gz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+bogus date in %changelog: Sat Mar  3 2005 ...
+bogus date in %changelog: Tue Feb  9 2005 ...
+bogus date in %changelog: Tue Feb  4 2005 ...
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+                        March       
+                Su Mo Tu We Th Fr Sa
+                       1  2  3  4  5   
+                 6  7  8  9 10 11 12   
+                13 14 15 16 17 18 19   
+-------------------------------------------------------------------------------
+
+Let's work around it
+--------------------
+
+-------------------------------------------------------------------------------
+sed -i '/%changelog/,$ d' $i
+sed -i 's|man\(.*\)\.gz|man\1*|' $i
+echo '%changelog' >> $i
+-------------------------------------------------------------------------------
+
+* and few dependencies fixes
+** +/bin/sed+ -> +sed+, +/etc/init.d+ -> +systemd+, ...
+* rest looks too package specific
+** and too much like real work :-)
+
+Final result
+------------
+
+image::final.png["Final results"]
+
+Overview
+--------
+
+* OBS is out there
+* it can be bend to do whatever you want
+* it can build almost whole CentOS
+* does plenty of stuff automatically
+* quite easy to use
+* provides easy and transparent view of the state we are in
+
+Questions? Feedback?
+--------------------
+
+image::qr_code_without_logo.jpg["Feedback link"]
+
+http://devconf.cz/f/126
