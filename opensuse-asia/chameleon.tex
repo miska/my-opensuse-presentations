@@ -1,0 +1,32 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Board}}
+\title{What's been going on in openSUSE}
+
+\newcommand{\addhicon}[1]{\begin{picture}(0,0)(0,0)
+\put(230,-170){\includegraphics[height=.3\paperheight]{#1}}
+\end{picture}}
+
+\newcommand{\addwicon}[1]{\begin{picture}(0,0)(0,0)
+\put(210,-180){\includegraphics[width=.3\paperwidth]{#1}}
+\end{picture}}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\sectionpage{openSUSE Asia 2015}
+
+\sectionpage{Thank you! Questions?}
+
+\end{document}
