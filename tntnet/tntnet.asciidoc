@@ -3,8 +3,8 @@ TNTNET +++<br/>+++ Web dynamite
 :author: Michal Hrušecký
 :backend: deckjs
 :title: Tntnet: Web dynamite
-:description: How to write a web service using C++
-:deckjs_theme: dark-green-draft
+:description: Writing web in C++
+:deckjs_theme: light-green
 :deckjs_transition: fade
 
 Writing a web service
@@ -179,7 +179,7 @@ Tntdb example - transaction
 -------------------------------------------------------------------------------
 #include <tntdb/transaction.h>
 
-void doSomeModifications(tntdb::Connection conn)
+void doSomeModifications(tntdb::Connection &conn)
 {
   tntdb::Transaction trans(conn);
 
@@ -206,6 +206,31 @@ Cxxtools
 ** loger
 ** ...
 
+Isn't C++ scary?
+----------------
+
+What about resource leaks?
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What about dangling pointers?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What about out-of-range access?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What about crashes?
+~~~~~~~~~~~~~~~~~~~
+
+C++ is not scary
+----------------
+
+* it is not C
+* there are constructors and destructors
+* there are scopes
+* there is STL
+* you can still make your application crash
+* there is systemd and auto-restart
+
 What next?
 ----------
 
@@ -216,3 +241,7 @@ http://tntnet.org/
 What can be in template:
 
 +man 7 ecpp+
+
+How to write good C++:
+
+https://youtu.be/1OEu9C51K2A
