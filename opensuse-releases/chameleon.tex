@@ -1,0 +1,284 @@
+\documentclass{beamer}
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+	  titlepagelogo=opensuse,
+          alternativetitlepage=true,% Use the fancy title page.
+          ]{Torino}
+
+\usepackage[pdf]{graphviz}
+
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\author{Michal Hru\v{s}eck\'{y}\newline {\small openSUSE Board}}
+\title{How openSUSE changed}
+
+\newcommand{\addhicon}[1]{\begin{picture}(0,0)(0,0)
+\put(230,-170){\includegraphics[height=.3\paperheight]{#1}}
+\end{picture}}
+
+\newcommand{\addwicon}[1]{\begin{picture}(0,0)(0,0)
+\put(210,-180){\includegraphics[width=.3\paperwidth]{#1}}
+\end{picture}}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\sectionpage{openSUSE Project}
+
+\begin{frame}[t]
+\frametitle{Who are we}
+openSUSE project
+\begin{itemize}
+\item promotes use of Linux everywhere
+\item not just a distribution
+\item creates openSUSE distribution
+\item works on tools that helps with either
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Who are we}
+\begin{center}
+\includegraphics[width=.75\paperwidth]{projects}
+\end{center}
+\end{frame}
+
+\sectionpage{Forces at play in distribution}
+
+\begin{frame}[t]
+\frametitle{Forces at play}
+\begin{center}
+\vspace{1cm}
+\includegraphics[width=.8\paperwidth]{forces}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Bleeding edge crazies}
+\begin{itemize}
+\item want newest everything
+\item latest is the greatest for them
+\item updates are exciting
+\item week without updates is boring
+\item small issues doesn't matter
+\item rolling distros are the future
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Boring grandpas}
+\begin{itemize}
+\item don't like any changes
+\item don't want new version, keep old one running as long as possible
+\item once they install something, they want to see just bugfixes
+\item world was much better in the "old days"
+\item they want they release rock solid
+\end{itemize}
+\end{frame}
+
+\sectionpage{openSUSE Tumbleweed}
+
+\begin{frame}[t]
+\frametitle{Distribution for bleeding edge crazies}
+\begin{center}
+\includegraphics[height=.7\paperheight]{always-changing}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{History}
+\begin{itemize}
+\item started by Greg Kroah-Hartman
+\item meant to be rolling and kinda stable
+\item originally add-on repo for stable release
+\item later some changes introduced to Factory development\newline
+\hspace{1cm}\(\Rightarrow\)Factory became more stable
+\item merged with Factory on November 4th 2014
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{What makes Tumbleweed working}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{tumbleweed-components}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{How Factory used to work}
+\begin{center}
+\digraph[scale=0.3]{oldfactory}{
+  rankdir=LR;
+  nodesep=1.5;
+  node [ color="black" fontcolor=black, penwidth=2]
+  edge [ color="black" fontcolor=black, penwidth=4, arrowsize=2]
+  A [ label="'foo' in home project" ]
+  Ad [ label="'foo's devel project" ]
+  F [ label="openSUSE Factory" ]
+  B [ label="branched 'bar' package" ]
+  Bd [ label="'bar's devel project" ]
+  B -> Bd [ label = "maintainer reviews fix", color=forestgreen ];
+  Bd -> F [ label = "automatic and manual checks", color=forestgreen ];
+  F -> B [ label = "new 'foo' broke 'bar'", color=firebrick ];
+  A -> Ad [ label = "maintainer review" ];
+  Ad -> F [ label = "automatic and manual checks" ];
+  {rank=same; Ad Bd }
+  {rank=same; A B }
+}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{How Factory works now}
+\begin{center}
+\digraph[scale=0.3]{newfactory}{
+  rankdir=LR;
+  nodesep=1.0;
+  node [ color="black" fontcolor=black, penwidth=2]
+  edge [ color="black" fontcolor=black, penwidth=4, arrowsize=2]
+  A [ label="package 'foo' in home project" ]
+  Ad [ label="'foo's devel project" ]
+  F [ label="openSUSE Factory" ]
+  B [ label="branched 'bar' package" ]
+  Bd [ label="'bar's devel project" ]
+  S [ label="Staging project" ]
+  O [ label="openQA" ]
+  U [ label="End user" ]
+  A -> Ad [ label = "maintainer review" ];
+  Ad -> F [ label = "sent to factory", style="dotted" ];
+  S -> O [ label = "tests run on staging", style="dotted" ];
+  Ad -> S [ label = "goes to staging" ];
+  S -> F [ label = "everything to factory once green", color=forestgreen ];
+  S -> B [ label = "new 'foo' broke 'bar'", color=firebrick ];
+  Bd -> F [ label = "sent to factory", color=forestgreen, style="dotted" ];
+  Bd -> S [ label = "goes to staging" ];
+  B -> Bd [ label = "maintainer reviews fix", color=forestgreen ];
+  {rank=same; Ad Bd S U }
+  {rank=same; A B }
+  {rank=same; O F }
+  F -> O [ label = "sent for final testing" ];
+  O -> U [ label = "update" ];
+}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{"Boring" numbers}
+\begin{center}
+\includegraphics[width=.9\paperwidth]{tumbleweed-installs}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Tumbleweed "quiet" week}
+\begin{itemize}
+\item 3 snapshots
+\item 1 new kernel
+\item 146 packages updated
+\item 15 new packages on DVD
+\item 38 packages removed from DVD
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Yet another week for Tumbleweed}
+\begin{itemize}
+\item 5 snapshots
+\item 2 new kernels
+\item 298 packages updated
+\item 47 new packages on DVD
+\item 42 packages removed from DVD
+\end{itemize}
+\end{frame}
+
+\sectionpage{openSUSE Leap}
+
+\begin{frame}
+\frametitle{Forces at play after Tumbleweed}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{partly-solved}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Distribution for boring grandpas}
+Requirements
+\begin{itemize}
+\item long release cycle
+\item long support
+\item good maintenance
+\item not the newest and coolest things
+\item stable
+\item a lot of packages
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{SUSE to help}
+\begin{itemize}
+\item SLE sources are out in the open
+\item including all the patches
+\item could be used to do SLENTOS
+\item could be used to do something much better
+\begin{itemize}
+\item we want more packages than SLE, right?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{How can we help each other}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{mutual-benefits}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{How it works}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{composition}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{How it works}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{leap-starting}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{How it works}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{leap-43}
+\end{center}
+\end{frame}
+
+\begin{frame}[t]
+\frametitle{Distribution for boring grandpas}
+Outcome
+\begin{itemize}
+\item release cycle based on SLE one (conservative)
+\item long support (over 3 years)
+\item well maintained and stable core
+\item much more packages than SLE
+\item first release 42.1 release in November 2015
+\item first release 42.2 planned for November 2016
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Few unpopular changes}
+\begin{center}
+\includegraphics[width=.8\paperwidth]{downloads}
+\end{center}
+\end{frame}
+
+\sectionpage{Thank you! Questions?}
+
+\end{document}
